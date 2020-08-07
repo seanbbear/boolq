@@ -1,0 +1,70 @@
+Some weights of the model checkpoint at albert-base-v2 were not used when initializing AlbertForSequenceClassification: ['predictions.bias', 'predictions.LayerNorm.weight', 'predictions.LayerNorm.bias', 'predictions.dense.weight', 'predictions.dense.bias', 'predictions.decoder.weight', 'predictions.decoder.bias']
+- This IS expected if you are initializing AlbertForSequenceClassification from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPretraining model).
+- This IS NOT expected if you are initializing AlbertForSequenceClassification from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+Some weights of AlbertForSequenceClassification were not initialized from the model checkpoint at albert-base-v2 and are newly initialized: ['classifier.weight', 'classifier.bias']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+using device cuda
+Using custom data configuration default
+  0%|                                                                                                                                                                                            | 0/9427 [00:00<?, ?it/s]  1%|██▏                                                                                                                                                                             | 114/9427 [00:00<00:08, 1132.95it/s]tensor([[   14, 11588,    72,   463,    69,    14,   153,     8, 10041,   384,
+            25,  7997,    20,    52,    57,  2158,    37,    14,  2425, 12258,
+           861,    15,   133,    14, 11588,    72,   463,    69,    14,   422,
+             8, 10041,   384,    25,   724,    21,  3156,    13,     5,  1410,
+            14,  5391,    16,    14, 13155,   198,    15,    19,    56,    15,
+           869,   463,    68,    14,   422,     8, 10041,   384,    15,  5799,
+         13517, 17730,  1702,    20,  3156,     6,     9,  2822,    89,  3281,
+            16,    14,  4126,  2425,   231,   140,    14,   126,    15,   113,
+           142,  4783,   274,    25, 16616,    29,    21,    78,   349,   133,
+            14,  4126,  2425,    63,    66,   349,  2183,    15,   836,    22,
+            18,  4126,  2425,  1160,    90, 14101,  3841,    37,    21,  4084,
+            26,   142,   377,    14,  4126,    15,    28,    14,   454,    16,
+            14,   298,    25,    20, 17289,   864,   119, 22509,     9, 22509,
+           119,   864, 17289,    20,    25,   298,    14,    16,   454,    14,
+            28,    15,  4126,    14,   377,   142,    26,  4084,    21,    37,
+          3841, 14101,    90,  1160,  2425,  4126,    18,    22,   836,    15,
+          2183,   349,    66,    63,  2425,  4126,    14,   133,   349,    78,
+            21,    29, 16616,    25,   274,  4783,   142,   113,    15,   126,
+            14,   140,   231,  2425,  4126,    14,    16,  3281,    89,  2822,
+             9,     6,  3156,    20,  1702, 17730, 13517,  5799,    15,   384,
+         10041,     8,   422,    14,    68,   463,   869,    15,    56,    19,
+            15,   198, 13155,    14,    16,  5391,    14,  1410,     5,    13,
+          3156,    21,   724,    25,   384, 10041,     8,   422,    14,    69,
+           463,    72, 11588,    14,   133,    15,   861, 12258,  2425,    14,
+            37,  2158,    57,    52,    20,  7997,    25,   384, 10041,     8,
+           153,    14,    69,   463,    72, 11588,    14,    15,  2425,  4126,
+            18,    22,   836,   377,    46,  6091, 10068,    17, 15509,  3480,
+           156,    56,    19,    15,   198,  5148,    14,    16,  5391,    14,
+            29,     9,  2425,  4126,    18,    22,   836,    25,   132,    14,
+           497,    56,  3746,  8365,    14,    15,  7595,   132,   158,    27,
+           432,     9,     6,  2969,    15,  3715,    19,    74,    63,  1289,
+           383,    14,    15,   810,   198,  7412,     5,    13,   861, 12258,
+          2425,    14,   424,   836,    19,   861,  1980,   394,    21,    16,
+          3240,  4394,    14,   120,  7335,  2891,    21,    28,   134,    28,
+            15,     6,   506,   164,   630,   468,    20,  5713,    25,    30,
+          2404,   352,    47,    15,  2404,  5957,    14,    16,   141,    52,
+            25,    15,   654,   497,    15,  2404,  6302, 16416,  5213,  1236,
+           124,     5,    13,  2404,  1158,   352,   557,    16,  2065,    29,
+           674, 21394,    40,    15,  2404,  5957,    14,    34,   709  2%|███▊                                                                                                                                                                             | 204/9427 [00:00<00:09, 996.52it/s]
+,    15,
+          4496,    85,  1200,    21,   363, 21791,  2826,  1958,     8,   917,
+          1367,     8,    58,     8,   108,     8,   132,    21,  2442,    25,
+            56,    15,  2404,   426,    14,   504,    94,    50, 17158,   132,
+           273,     9,     6, 17158,   132,    41,    63,   198,  3147,   352,
+            73,   132,    46,    80,    15,  2158,    53,    90,    56,    19,
+           942,    40,  3503,   198,    64,    14,    20,   397,    47,    15,
+          2166,    20, 11236,    81,    26,    23,  6936,   501,   124,     5,
+            13,  2166, 11236,   132,   104,   163,  2622,   953, 10528,    14,
+             9,  8711,    29,   462,  2425,  4126,    18,    22,   836,    17,
+         19002, 11357,    29,   268,  2425,  4126,    18,    22,   836,    19,
+            15,  2088,   104,  1190,    63,    48,    15,  1231,    20,     9,
+          2891,  1816,    20, 28822,   102,  1088,    25, 11588,    21,    30,
+           985,    59,   100,    15,  1487,    26,    71,   442,    44,  3962,
+            18,    22,  2425,    21,    30,  3772,    17,  1739,    16,  2024,
+          7480,    14,  2203,   123,  8365]])
+Traceback (most recent call last):
+  File "main.py", line 97, in <module>
+    train_dataset = get_dataset(name="boolq", tokenizer=tokenizer, split='train')
+  File "main.py", line 51, in get_dataset
+    tensor_features = tokenizer.__call__(tensor_features['overflowing_tokens'], stride=128, return_tensors='pt', max_length = 512,  padding='max_length', truncation=True ,return_overflowing_tokens=True, is_pretokenized =True)
+  File "/usr/local/lib/python3.6/dist-packages/transformers/tokenization_utils_base.py", line 1599, in __call__
+    "text input must of type `str` (single example), `List[str]` (batch or single pretokenized example) "
+AssertionError: text input must of type `str` (single example), `List[str]` (batch or single pretokenized example) or `List[List[str]]` (batch of pretokenized examples).

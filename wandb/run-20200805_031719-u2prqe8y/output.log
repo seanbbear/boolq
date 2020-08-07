@@ -1,0 +1,9 @@
+using device cuda
+Using custom data configuration default
+tensor([], dtype=torch.int64)
+Traceback (most recent call last):
+  File "main.py", line 115, in <module>
+    train_dataset = get_dataset(name="boolq", tokenizer=tokenizer, split='train')
+  File "main.py", line 57, in get_dataset
+    answer = torch.cat((answer, answer_tensor),0)
+TypeError: expected Tensor as element 1 in argument 0, but got BatchEncoding

@@ -1,0 +1,26 @@
+using device cuda
+Using custom data configuration default
+Using custom data configuration default
+get dataset
+Traceback (most recent call last):
+  File "main.py", line 153, in <module>
+    labels = batch_dict[3]
+  File "/usr/local/lib/python3.6/dist-packages/torch/nn/modules/module.py", line 532, in __call__
+    result = self.forward(*input, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/transformers/modeling_albert.py", line 814, in forward
+    output_hidden_states=output_hidden_states,
+  File "/usr/local/lib/python3.6/dist-packages/torch/nn/modules/module.py", line 532, in __call__
+    result = self.forward(*input, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/transformers/modeling_albert.py", line 556, in forward
+    input_ids, position_ids=position_ids, token_type_ids=token_type_ids, inputs_embeds=inputs_embeds
+  File "/usr/local/lib/python3.6/dist-packages/torch/nn/modules/module.py", line 532, in __call__
+    result = self.forward(*input, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/transformers/modeling_bert.py", line 178, in forward
+    inputs_embeds = self.word_embeddings(input_ids)
+  File "/usr/local/lib/python3.6/dist-packages/torch/nn/modules/module.py", line 532, in __call__
+    result = self.forward(*input, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/torch/nn/modules/sparse.py", line 114, in forward
+    self.norm_type, self.scale_grad_by_freq, self.sparse)
+  File "/usr/local/lib/python3.6/dist-packages/torch/nn/functional.py", line 1484, in embedding
+    return torch.embedding(weight, input, padding_idx, scale_grad_by_freq, sparse)
+RuntimeError: Expected object of device type cuda but got device type cpu for argument #3 'index' in call to _th_index_select
