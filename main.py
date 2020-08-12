@@ -1,15 +1,10 @@
-from core import get_dataset, compute_accuracy
-# import nlp 
-# from nlp import load_dataset
-# import numpy as np
-
+from core import get_dataset, compute_accuracy, model_setting
 import torch
 
 from torch.utils.data import DataLoader
 from transformers import AdamW
 import os
 import wandb
-from transformers import AutoTokenizer, AlbertForSequenceClassification, AlbertConfig
 from tqdm import tqdm
 
 
@@ -17,18 +12,22 @@ if __name__ == "__main__":
     # wandb專案名稱
     wandb.init(project='boolq')
 
-    # model setting
-    model_config = AlbertConfig
-    config = model_config.from_pretrained("albert-base-v2",num_labels = 2)
-    tokenizer = AutoTokenizer.from_pretrained("albert-base-v2")
-    model = AlbertForSequenceClassification.from_pretrained("albert-base-v2")
+    config,tokenizer,model = model_setting('bert')
    
     wandb.watch(model)
 
     # setting device    
     device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
-    model.to(device)
+    
+    # 多GPU
+    print(torch.cuda.device_count())
+    if device=='cuda' and torch.cuda.device_count()>1:         
+        model = torch.nn.DataParallel(model,device_ids=[0,1])
+    
     print("using device",device)
+    model.to(device)
+    
+    
    
     train_dataset = get_dataset(name="boolq", tokenizer=tokenizer, split='train')
     test_dataset = get_dataset(name="boolq", tokenizer=tokenizer, split='validation')
@@ -39,10 +38,10 @@ if __name__ == "__main__":
     # Prepare optimizer and schedule (linear warmup and decay)
     no_decay = ['bias', 'LayerNorm.weight']
     optimizer_grouped_parameters = [
-        {'params': [p for n, p in model.named_parameters() if not any(nd in n for nd in no_decay)], 'weight_decay': 0.0},
-        {'params': [p for n, p in model.named_parameters() if any(nd in n for nd in no_decay)], 'weight_decay': 0.0}
+        {'params': [p for n, p in model.named_parameters() if not any(nd in n for nd in no_decay)], 'weight_decay': 0.1},
+        {'params': [p for n, p in model.named_parameters() if any(nd in n for nd in no_decay)], 'weight_decay': 0.1}
         ]
-    optimizer = AdamW(optimizer_grouped_parameters, lr=5e-6, eps=1e-8)
+    optimizer = AdamW(optimizer_grouped_parameters, lr=5e-5, eps=1e-8)
 
     model.zero_grad()
     for epoch in tqdm(range(15)):
@@ -56,7 +55,10 @@ if __name__ == "__main__":
                 labels = batch_dict[3]
             )
             loss, logits = outputs[:2]
-            loss.sum().backward()
+            if (device=='cuda' and device,torch.cuda.device_count()>1):
+                loss = loss.mean()
+
+            loss.backward()
             optimizer.step()
             model.zero_grad()
 
@@ -83,6 +85,9 @@ if __name__ == "__main__":
                 labels = batch_dict[3]
                 )
             loss,logits = outputs[:2]
+            if (device=='cuda' and device,torch.cuda.device_count()>1):                 
+                loss = loss.mean()
+            
             
             # 計算loss
             loss_t = loss.item()
