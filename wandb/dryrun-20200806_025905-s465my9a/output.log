@@ -1,16 +1,0 @@
-Some weights of the model checkpoint at albert-base-v2 were not used when initializing AlbertForSequenceClassification: ['predictions.bias', 'predictions.LayerNorm.weight', 'predictions.LayerNorm.bias', 'predictions.dense.weight', 'predictions.dense.bias', 'predictions.decoder.weight', 'predictions.decoder.bias']
-- This IS expected if you are initializing AlbertForSequenceClassification from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPretraining model).
-- This IS NOT expected if you are initializing AlbertForSequenceClassification from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
-Some weights of AlbertForSequenceClassification were not initialized from the model checkpoint at albert-base-v2 and are newly initialized: ['classifier.weight', 'classifier.bias']
-You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
-using device cuda
-Using custom data configuration default
-  0%|                                                                                                                                                                                            | 0/9427 [00:00<?, ?it/s]  0%|▏                                                                                                                                                                                | 10/9427 [00:00<00:06, 1374.91it/s]
-Traceback (most recent call last):
-  File "main.py", line 120, in <module>
-    train_dataset = get_dataset(name="boolq", tokenizer=tokenizer, split='train')
-  File "/root/boolq/core.py", line 43, in get_dataset
-    return TensorDataset(input_ids, token_type_ids, attention_mask, answer)
-  File "/usr/local/lib/python3.6/dist-packages/torch/utils/data/dataset.py", line 158, in __init__
-    assert all(tensors[0].size(0) == tensor.size(0) for tensor in tensors)
-AssertionError

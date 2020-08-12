@@ -1,15 +1,0 @@
-Some weights of the model checkpoint at albert-base-v2 were not used when initializing AlbertForSequenceClassification: ['predictions.bias', 'predictions.LayerNorm.weight', 'predictions.LayerNorm.bias', 'predictions.dense.weight', 'predictions.dense.bias', 'predictions.decoder.weight', 'predictions.decoder.bias']
-- This IS expected if you are initializing AlbertForSequenceClassification from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPretraining model).
-- This IS NOT expected if you are initializing AlbertForSequenceClassification from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
-Some weights of AlbertForSequenceClassification were not initialized from the model checkpoint at albert-base-v2 and are newly initialized: ['classifier.weight', 'classifier.bias']
-You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
-using device cuda
-Using custom data configuration default
-  0%|                                                                                                                                                                                            | 0/9427 [00:00<?, ?it/s]  0%|                                                                                                                                                                                            | 0/9427 [00:00<?, ?it/s]
-Traceback (most recent call last):
-  File "main.py", line 107, in <module>
-    train_dataset = get_dataset(name="boolq", tokenizer=tokenizer, split='train')
-  File "main.py", line 44, in get_dataset
-    input_ids = np.concatenate((input_ids, [tensor_features['input_ids'].numpy()]),axis=0)
-  File "<__array_function__ internals>", line 6, in concatenate
-ValueError: all the input arrays must have same number of dimensions, but the array at index 0 has 1 dimension(s) and the array at index 1 has 3 dimension(s)
