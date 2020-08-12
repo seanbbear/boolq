@@ -4,6 +4,7 @@ import numpy as np
 import torch
 from torch.utils.data import TensorDataset
 
+
 def get_dataset(name, tokenizer, split):     
     dataset = load_dataset(name, split=split)
 
@@ -45,6 +46,22 @@ def compute_accuracy(y_pred, y_target):
     _, y_pred_indices = y_pred.max(dim=1)
     n_correct = torch.eq(y_pred_indices, y_target).sum().item()
     return n_correct / len(y_pred_indices) * 100  
+
+def model_setting(model_name):
+    if model_name=='bert':
+        from transformers import AutoTokenizer, BertForSequenceClassification, BertConfig            
+        config = BertConfig.from_pretrained("bert-base-uncased",num_labels = 2)              
+        tokenizer = AutoTokenizer.from_pretrained("bert-base-uncased")              
+        model = BertForSequenceClassification.from_pretrained("bert-base-uncased") 
+        return config, tokenizer, model
+            
+    
+    elif model_name=='albert':
+        from transformers import AutoTokenizer, AlbertForSequenceClassification, AlbertConfig   
+        config = AlbertConfig.from_pretrained("albert-base-v2",num_labels = 2)     
+        tokenizer = AutoTokenizer.from_pretrained("albert-base-v2")     
+        model = AlbertForSequenceClassification.from_pretrained("albert-base-v2")
+        return config, tokenizer, model
 
 
 

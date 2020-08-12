@@ -12,7 +12,7 @@ if __name__ == "__main__":
     # wandb專案名稱
     wandb.init(project='boolq')
 
-    config,tokenizer,model = model_setting('bert')
+    config, tokenizer, model = model_setting('bert')
    
     wandb.watch(model)
 
